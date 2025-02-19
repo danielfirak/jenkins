@@ -4,7 +4,6 @@
     F5_SERVER: "192.168.239.142"
     F5_USER: "dano"
     F5_PASSWORD: "Dano0984"
-    F5_SERVER_PORT: "22"
 - name: Assigning nodes to LTM pools (nodes_ltm_pools.csv)
   bigip_pool:
     provider:
