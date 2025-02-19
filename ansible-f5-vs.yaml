@@ -16,7 +16,7 @@
         state: "{{item.state}"
         pool: "{{item.name}}"
         partition: "{{item.partition}}"
-      loop: "{{virtual_server}}"
+      loop: "{{pools}}"
       delegate_to: localhost
 
 
@@ -34,4 +34,5 @@
         port: "{{item.port}}"
         pool: "{{item.pool}}"
         snat: "{{item.snat}}"
+      loop: "{{virtual_servers}}"
       delegate_to: localhost
