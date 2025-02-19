@@ -6,17 +6,13 @@
     F5_PASSWORD: "Dano0984"
     F5_SERVER_PORT: "22"
 - name: Assigning nodes to LTM pools (nodes_ltm_pools.csv)
-    bigip_pool_member:
+    bigip_pool:
       provider:
         server: "{{ F5_SERVER }}"
         user: "{{ F5_USER }}"
         password: "{{ F5_PASSWORD }}"
-        server_port: "{{ F5_SERVER_PORT }}"
-        validate_certs: "{{ F5_VALIDATE_CERTS }}"
-      state: "present"
-      pool: "my_pool"
+      state: present
+      pool: my_pool
       partition: "common"
       port: "80"
-      name: "my_host_1"
-      address: "1.1.1.1"
-    with_items: "{{hostvars.localhost.nodes_ltm_pools}}"'
+    delegate_to: localhost
