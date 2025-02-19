@@ -13,9 +13,10 @@
           user: "{{ F5_USER }}"
           password: "{{ F5_PASSWORD }}"
           validate_certs: false
-        state: present
-        pool: my_pool
-        partition: Common
+        state: "{{item.state}"
+        pool: "{{item.name}}"
+        partition: "{{item.partition}}"
+      loop: "{{virtual_server}}"
       delegate_to: localhost
 
 
@@ -26,11 +27,11 @@
           user: "{{ F5_USER }}"
           password: "{{ F5_PASSWORD }}"
           validate_certs: false
-        state: enabled
-        name: my_virtual_server
-        partition: Common
-        destination: 192.168.10.10
-        port: 80
-        pool: my_pool
-        snat: None
+        state: "{{item.state}"
+        name: "{{item.name}"
+        partition: "{{item.partition}}"
+        destination: "{{item.destination}}"
+        port: "{{item.port}}"
+        pool: "{{item.pool}}"
+        snat: "{{item.snat}}"
       delegate_to: localhost
