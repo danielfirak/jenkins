@@ -1,5 +1,5 @@
 ---
-virtual_serves:
+virtual_servers:
   -name: my_vs_1
    destination: 192.168.0.1
    state: present
