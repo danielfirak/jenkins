@@ -1,17 +1,36 @@
-- name: F5 configuration - Virtual server
+- name: F5 configuration - Virtual serve
   hosts: localhost
   vars:
     F5_SERVER: "192.168.239.142"
     F5_USER: "dano"
-    F5_PASSWORD: "Dano0984"
-- name: Assigning nodes to LTM pools (nodes_ltm_pools.csv)
-  bigip_pool:
-    provider:
-      server: "{{ F5_SERVER }}"
-      user: "{{ F5_USER }}"
-      password: "{{ F5_PASSWORD }}"
-    state: present
-    pool: my_pool
-    partition: Common
-    port: "80"
-  delegate_to: localhost
+    F5_PASSWORD: "Krumplicka123!@#"
+
+  tasks:
+    - name: Create LTM pool
+      bigip_pool:
+        provider:
+          server: "{{ F5_SERVER }}"
+          user: "{{ F5_USER }}"
+          password: "{{ F5_PASSWORD }}"
+          validate_certs: false
+        state: present
+        pool: my_pool
+        partition: Common
+      delegate_to: localhost
+
+
+    - name: Create LTM virtual-servers
+      bigip_virtual_server:
+        provider:
+          server: "{{ F5_SERVER }}"
+          user: "{{ F5_USER }}"
+          password: "{{ F5_PASSWORD }}"
+          validate_certs: false
+        state: enabled
+        name: my_virtual_server
+        partition: Common
+        destination: 192.168.10.10
+        port: 80
+        pool: my_pool
+        snat: None
+      delegate_to: localhost
