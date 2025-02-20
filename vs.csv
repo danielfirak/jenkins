@@ -1,0 +1,8 @@
+name,destination,state,port,pool,snat,partition
+my_vs_1,192.168.0.1,present,80,my_pool_1,none,Common
+my_vs_2,192.168.0.2,present,80,my_pool_1,none,Common
+
+
+
+
+
