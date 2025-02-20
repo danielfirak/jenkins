@@ -1,0 +1,3 @@
+name,partition,state
+my_pool_1,Common,present
+my_pool_2,Common,present
