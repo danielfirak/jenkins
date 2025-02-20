@@ -1,0 +1,45 @@
+---
+- name: F5 configuration - Virtual serve
+  hosts: localhost
+  vars:
+    F5_SERVER: "192.168.239.142"
+    F5_USER: "dano"
+    F5_PASSWORD: "Krumplicka123!@#"
+  vars_files:
+    - vars_file_pool.yaml
+    - vars_file_vs.yaml
+  tasks:
+    - name: Create LTM pool
+      bigip_pool:
+        provider:
+          server: "{{ F5_SERVER }}"
+          user: "{{ F5_USER }}"
+          password: "{{ F5_PASSWORD }}"
+          validate_certs: false
+        state: "{{item.state}}"
+        pool: "{{item.name}}"
+        partition: "{{item.partition}}"
+      with_items: "{{pools}}"
+      delegate_to: localhost
+      register: log
+
+    - name: Debug pool
+      debug:
+        var: log
+
+    - name: Create LTM virtual-servers
+      bigip_virtual_server:
+        provider:
+          server: "{{ F5_SERVER }}"
+          user: "{{ F5_USER }}"
+          password: "{{ F5_PASSWORD }}"
+          validate_certs: false
+        state: "{{item.state}}"
+        name: "{{item.name}}"
+        partition: "{{item.partition}}"
+        destination: "{{item.destination}}"
+        port: "{{item.port}}"
+        pool: "{{item.pool}}"
+        snat: "{{item.snat}}"
+      loop: "{{virtual_servers}}"
+      delegate_to: localhost
