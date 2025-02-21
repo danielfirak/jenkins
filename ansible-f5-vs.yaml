@@ -29,7 +29,7 @@
           password: "{{ F5_PASSWORD }}"
           validate_certs: false
         state: "{{item.state}"
-        name: "{{item.name}"
+        name: "{{item.name}}"
         partition: "{{item.partition}}"
         destination: "{{item.destination}}"
         port: "{{item.port}}"
