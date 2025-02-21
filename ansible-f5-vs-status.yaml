@@ -5,7 +5,7 @@
     F5_SERVER: "192.168.239.142"
     F5_USER: "dano"
     F5_PASSWORD: "Krumplicka123!@#"
-#    vs_lookup: "my_vs_1"
+#   vs_lookup: "my_vs_1"
 
   tasks:
     - name: Get basic info from F5
