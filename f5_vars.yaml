@@ -1,24 +1,25 @@
 ---
 virtual_servers:
-  -name: my_vs_1
-   destination: 192.168.0.1
-   state: present
-   port: 80
-   pool: my_pool_1
-   snat: none
-   partition: Common
-  -name: my_vs_2
-   destination: 192.168.0.2
-   state: present
-   port: 80
-   pool: my_pool_2
-   snat: none
-   partition: Common
+  - name: my_vs_1
+    destination: 192.168.0.1
+    state: present
+    port: 80
+    pool: my_pool_1
+    snat: none
+    partition: Common
+  - name: my_vs_2
+    destination: 192.168.0.2
+    state: present
+    port: 80
+    pool: my_pool_2
+    snat: none
+    partition: Common
 
 pools:
-  -name: my_pool_1
-   partition: Common
-   state: present 
-  -name: my_pool_2
-   partition: Common
-   state: present 
+  - name: my_pool_1
+    partition: Common
+    state: present
+  - name: my_pool_2
+    partition: Common
+    state: present
+
