@@ -14,7 +14,7 @@
           user: "{{ F5_USER }}"
           password: "{{ F5_PASSWORD }}"
           validate_certs: false
-        state: "{{item.state}"
+        state: "{{item.state}}"
         pool: "{{item.name}}"
         partition: "{{item.partition}}"
       with_items: "{{pools}}"
@@ -28,7 +28,7 @@
           user: "{{ F5_USER }}"
           password: "{{ F5_PASSWORD }}"
           validate_certs: false
-        state: "{{item.state}"
+        state: "{{item.state}}"
         name: "{{item.name}}"
         partition: "{{item.partition}}"
         destination: "{{item.destination}}"
