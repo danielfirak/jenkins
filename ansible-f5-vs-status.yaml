@@ -1,0 +1,33 @@
+---
+- name: F5 get infomation from device
+  hosts: localhost
+  vars:
+    F5_SERVER: "192.168.239.142"
+    F5_USER: "dano"
+    F5_PASSWORD: "Krumplicka123!@#"
+#    vs_lookup: "my_vs_1"
+
+  tasks:
+    - name: Get basic info from F5
+      bigip_device_info:
+        provider:
+          server: "{{ F5_SERVER }}"
+          user: "{{ F5_USER }}"
+          password: "{{ F5_PASSWORD }}"
+          validate_certs: false
+        gather_subset:
+          - virtual-servers
+
+      register: log
+
+    - name: Task with variables
+      set_fact:
+        vs_name: "{{log['ansible_facts']['ansible_net_virtual_servers'] | map (attribute='name') | list }}"
+        vs_enabled: "{{log['ansible_facts']['ansible_net_virtual_servers'] | map (attribute='enabled') | list }}"
+    - set_fact:
+        vs_dict: "{{ dict(vs_name | zip(vs_enabled)) }}"
+
+    - name: Print var out
+      debug:
+        msg: "Is virtual server: {{ vs_lookup}} enabled:  {{vs_dict[vs_lookup]}}"
+
