@@ -29,4 +29,9 @@
     - name: Print var out
       debug:
         msg: "Is virtual server: {{ vs_lookup}} enabled:  {{vs_dict[vs_lookup]}}"
+        
+    - name: Write status to file
+      copy:
+        content: "{{ vs_dict[vs_lookup] }}"
+        dest: /tmp/ansible-f5-vs-status-tmp.txt
 
