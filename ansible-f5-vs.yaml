@@ -3,7 +3,7 @@
   vars:
     F5_SERVER: "192.168.239.142"
     F5_USER: "dano"
-    F5_PASSWORD: "Krumplicka123!@#"
+    F5_PASSWORD: ""
   vars_files:
     f5_vars.yaml
   tasks:
